@@ -23,7 +23,6 @@ class HomeViewModel : ViewModel() {
                 inputText.postValue("")
             }
         }
-        this._word.postValue(inputText.value)
     }
 
     //TODO: 6b.urobit transformaciu slova aby sa zobrazoval text "Slovo je: "
