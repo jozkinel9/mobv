@@ -1,9 +1,7 @@
 package com.example.zadanie.ui.viewModels
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.zadanie.data.DataRepository
 import com.example.zadanie.data.db.model.WordItem
 import kotlinx.coroutines.launch
@@ -13,12 +11,22 @@ class DatabaseViewModel(private val repository: DataRepository) : ViewModel() {
     val words: LiveData<List<WordItem>>
         get() = repository.getWords()
 
-    //TODO: 8. nahradit observer databindingom v xml
+    val wordAsText: LiveData<String> = Transformations.map(words) {
+        var text = ""
+        it?.let {
+            it.forEach { text += "$it, " }
+        }
+        text
+    }
 
-    //TODO: 9. urobit obojsmerny binding pre edittext
+    val inputText: MutableLiveData<String> = MutableLiveData()
 
-    //TODO: 10. nahradit listener databindingom v xml
-    fun insertWord(word: String) {
-        viewModelScope.launch { repository.insertWord(WordItem(word)) }
+    fun insertWord() {
+        inputText.value?.let {
+            if (it.isNotEmpty()) {
+                viewModelScope.launch { repository.insertWord(WordItem(it)) }
+                inputText.postValue("")
+            }
+        }
     }
 }

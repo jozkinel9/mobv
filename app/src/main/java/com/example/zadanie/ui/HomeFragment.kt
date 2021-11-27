@@ -10,10 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import com.example.zadanie.ui.viewModels.HomeViewModel
+import androidx.navigation.findNavController
 import com.example.zadanie.R
 import com.example.zadanie.databinding.FragmentHomeBinding
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.example.zadanie.ui.viewModels.HomeViewModel
 
 
 class HomeFragment : Fragment() {
@@ -34,26 +34,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO: 2. nahradit observer databindingom v xml
-//        homeViewModel.word.observe(viewLifecycleOwner) { words_text.text = it }
-
-        //TODO: 5. nahradit listener databindingom v xml
-//        word_btn.setOnClickListener { changeWord() }
-
-        //
-        homeViewModel.transformedText.observe(viewLifecycleOwner){
+        homeViewModel.transformedText.observe(viewLifecycleOwner) {
             Log.d("nasapremenna", "je: $it")
         }
 
-        //TODO: 6. umoznit navigaciu do DatabaseFragmentu po stlaceni tlacidla
+        binding.databaseBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.go_to_database)
+        }
     }
-
-    //TODO: 5. odstanit funkciu pomocou databindingu v xml
-//    private fun changeWord() {
-//        val word = word_input.text.toString()
-//        if (word.isNotEmpty()) {
-//            homeViewModel.changeWord(word)
-//            word_input.text.clear()
-//        }
-//    }
 }
