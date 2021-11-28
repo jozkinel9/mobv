@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="nasmodel"
-            type="com.example.zadanie.ui.viewModels.HomeViewModel" />
+            type="com.example.zadanie.ui.viewModels.RegisterViewModel" />
     </data>
 
 
@@ -14,30 +13,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/word_input"
-            android:text="@={nasmodel.inputText}"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/public_key_text"
+            android:text="Public key"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@id/word_btn"
+            android:layout_marginTop="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/word_btn"
-            android:text="Save"
-            android:onClick="@{() -> nasmodel.changeWord()}"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/public_key_input"
+            android:text=""
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/word_input"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/public_key_text" />
 
         <TextView
-            android:id="@+id/words_text"
-            android:text="@{nasmodel.word}"
+            android:id="@+id/private_key_text"
+            android:text="Private key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/public_key_input" />
+
+        <EditText
+            android:id="@+id/private_key_input"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/private_key_text" />
+
+
+        <TextView
+            android:id="@+id/login_text"
+            android:text="Login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -45,16 +69,54 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/word_input" />
+            app:layout_constraintTop_toBottomOf="@id/private_key_input" />
 
-        <Button
-            android:id="@+id/database_btn"
-            android:text="Otvor databazu"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/login_input"
+            android:text=""
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/login_text" />
+
+        <TextView
+            android:id="@+id/pass_text"
+            android:text="Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_input" />
+
+        <EditText
+            android:id="@+id/pass_input"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pass_text" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:text="Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pass_input" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
