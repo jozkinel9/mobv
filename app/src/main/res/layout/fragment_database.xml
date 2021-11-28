@@ -26,7 +26,7 @@
         <Button
             android:id="@+id/word_btn"
             android:text="Save"
-            android:onClick="@{() -> datamodel.insertWord()}"
+            android:onClick="@{() -> datamodel.insertAccount()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

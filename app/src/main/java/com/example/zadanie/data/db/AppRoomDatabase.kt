@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.zadanie.data.db.model.WordItem
+import com.example.zadanie.data.db.model.Account
+import com.example.zadanie.data.db.model.Contact
+import com.example.zadanie.data.db.model.Transaction
 
 @Database(
-    entities = [WordItem::class],
-    version = 1,
+    entities = [Account::class, Contact::class, Transaction::class],
+    version = 3,
     exportSchema = false
 )
 abstract class AppRoomDatabase : RoomDatabase() {

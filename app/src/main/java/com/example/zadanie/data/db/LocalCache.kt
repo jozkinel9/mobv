@@ -1,29 +1,41 @@
 package com.example.zadanie.data.db
 
 import androidx.lifecycle.LiveData
-import com.example.zadanie.data.db.DbDao
-import com.example.zadanie.data.db.model.WordItem
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.zadanie.data.db.model.Account
+import com.example.zadanie.data.db.model.Contact
 
 class LocalCache(private val dao: DbDao) {
-
-    suspend fun insertWords(wordItems: List<WordItem>) {
-        dao.insertWords(wordItems)
+//  Accounts
+    suspend fun insertAccount(account: Account) {
+        dao.insertAccount(account)
     }
+    fun getAccounts(): LiveData<List<Account>> = dao.getAccounts()
 
-    suspend fun insertWord(wordItem: WordItem) {
-        dao.insertWord(wordItem)
-    }
 
-    suspend fun updateVideo(wordItem: WordItem) {
-        dao.updateWord(wordItem)
-    }
+//  Contacts
+    suspend fun insertContact(contact: Contact) {
+    dao.insertContact(contact)
+}
+    fun getContacts(): LiveData<List<Contact>> = dao.getContacts()
 
-    fun deleteWord(wordItem: WordItem) {
-        GlobalScope.launch { dao.deleteWord(wordItem) }
-    }
 
-    fun getWords(): LiveData<List<WordItem>> = dao.getWords()
+
+//    suspend fun insertWords(accounts: List<Account>) {
+//        dao.insertWords(accounts)
+//    }
+//
+//    suspend fun insertWord(account: Account) {
+//        dao.insertAccount(account)
+//    }
+//
+//    suspend fun updateVideo(account: Account) {
+//        dao.updateWord(account)
+//    }
+//
+//    fun deleteWord(account: Account) {
+//        GlobalScope.launch { dao.deleteWord(account) }
+//    }
+//
+//    fun getWords(): LiveData<List<Account>> = dao.getWords()
 
 }

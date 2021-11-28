@@ -3,29 +3,28 @@ package com.example.zadanie.ui.viewModels
 
 import androidx.lifecycle.*
 import com.example.zadanie.data.DataRepository
-import com.example.zadanie.data.db.model.WordItem
+import com.example.zadanie.data.db.model.Account
 import kotlinx.coroutines.launch
 
 class DatabaseViewModel(private val repository: DataRepository) : ViewModel() {
-
-    val words: LiveData<List<WordItem>>
-        get() = repository.getWords()
+    val accounts: LiveData<List<Account>>
+        get() = repository.getAccounts()
 
     //len funkcia na vypisanie textu
-    val wordAsText: LiveData<String> = Transformations.map(words) {
+    val wordAsText: LiveData<String> = Transformations.map(accounts) {
         var text = ""
         it?.let {
-            it.forEach { text += "$it, " }
+            it.forEach { text += "${it.accId}, " }
         }
         text
     }
 
     val inputText: MutableLiveData<String> = MutableLiveData()
 
-    fun insertWord() {
+    fun insertAccount() {
         inputText.value?.let {
             if (it.isNotEmpty()) {
-                viewModelScope.launch { repository.insertWord(WordItem(it)) }
+                viewModelScope.launch { repository.insertWord(Account(it, "bla", "bla", "bla")) }
                 inputText.postValue("")
             }
         }
