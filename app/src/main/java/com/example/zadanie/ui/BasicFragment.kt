@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.zadanie.R
 import com.example.zadanie.databinding.BasicFragmentBinding
 import com.example.zadanie.ui.viewModels.BasicViewModel
@@ -33,6 +34,11 @@ class BasicFragment : Fragment() {
 //        binding.databaseBtn.setOnClickListener {
 //            it.findNavController().navigate(R.id.go_to_database)
 //        }
+
+//      nav to ContactsFragment
+        binding.contactsBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_basicFragment_to_contactsFragment)
+        }
     }
 
 }

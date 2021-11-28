@@ -2,7 +2,8 @@ package com.example.zadanie.data
 
 import androidx.lifecycle.LiveData
 import com.example.zadanie.data.db.LocalCache
-import com.example.zadanie.data.db.model.WordItem
+import com.example.zadanie.data.db.model.Account
+import com.example.zadanie.data.db.model.Contact
 
 /**
  * Repository class that works with local and remote data sources.
@@ -23,11 +24,19 @@ class DataRepository private constructor(
             }
     }
 
-    fun getWords(): LiveData<List<WordItem>> = cache.getWords()
+//  Accounts
+    fun getAccounts(): LiveData<List<Account>> = cache.getAccounts()
 
-    suspend fun insertWord(wordItem: WordItem) {
-        cache.insertWord(wordItem)
+    suspend fun insertWord(account: Account) {
+        cache.insertAccount(account)
     }
+
+//  Contacts
+    suspend fun insertContact(contact: Contact) {
+        cache.insertContact(contact)
+    }
+
+    fun getContacts(): LiveData<List<Contact>> = cache.getContacts()
 
 
 }

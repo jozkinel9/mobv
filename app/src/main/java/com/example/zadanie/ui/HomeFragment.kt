@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        binding.nasmodel = homeViewModel
+        binding.credentials = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
@@ -34,7 +34,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //logovanie observovanej premennej
         homeViewModel.transformedText.observe(viewLifecycleOwner) {
             Log.d("nasapremenna", "je: $it")
         }
