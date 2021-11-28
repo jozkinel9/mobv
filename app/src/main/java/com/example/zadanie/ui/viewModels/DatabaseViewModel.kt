@@ -11,6 +11,7 @@ class DatabaseViewModel(private val repository: DataRepository) : ViewModel() {
     val words: LiveData<List<WordItem>>
         get() = repository.getWords()
 
+    //len funkcia na vypisanie textu
     val wordAsText: LiveData<String> = Transformations.map(words) {
         var text = ""
         it?.let {

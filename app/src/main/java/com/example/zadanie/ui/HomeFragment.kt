@@ -34,12 +34,24 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //logovanie observovanej premennej
         homeViewModel.transformedText.observe(viewLifecycleOwner) {
             Log.d("nasapremenna", "je: $it")
         }
 
+//      nav to DatabaseFragment
         binding.databaseBtn.setOnClickListener {
             it.findNavController().navigate(R.id.go_to_database)
+        }
+
+//      nav to BasicFragment
+        binding.loginBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_basicFragment)
+        }
+
+//      nav to RegisterFragment
+        binding.registerBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_registerFragment)
         }
     }
 }
