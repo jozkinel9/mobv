@@ -27,7 +27,7 @@ class DataRepository private constructor(
 //  Accounts
     fun getAccounts(): LiveData<List<Account>> = cache.getAccounts()
 
-    suspend fun insertWord(account: Account) {
+    suspend fun insertAccount(account: Account) {
         cache.insertAccount(account)
     }
 

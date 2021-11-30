@@ -9,15 +9,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.example.zadanie.R
 import com.example.zadanie.databinding.FragmentHomeBinding
+import com.example.zadanie.ui.viewModels.DatabaseViewModel
 import com.example.zadanie.ui.viewModels.HomeViewModel
+import com.opinyour.android.app.data.utils.Injection
 
 
 class HomeFragment : Fragment() {
-    private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var homeViewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -25,7 +28,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        binding.credentials = homeViewModel
+        homeViewModel =
+            ViewModelProvider(this, Injection.provideViewModelFactory(requireContext()))
+                .get(HomeViewModel::class.java)
+        binding.homeModel = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
@@ -34,9 +40,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.transformedText.observe(viewLifecycleOwner) {
-            Log.d("nasapremenna", "je: $it")
-        }
+//        homeViewModel.transformedText.observe(viewLifecycleOwner) {
+//            Log.d("nasapremenna", "je: $it")
+//        }
 
 //      nav to DatabaseFragment
         binding.databaseBtn.setOnClickListener {
