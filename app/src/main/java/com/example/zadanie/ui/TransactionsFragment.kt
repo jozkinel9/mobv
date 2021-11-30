@@ -30,4 +30,8 @@ class TransactionsFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    fun loadTransactions(){
+
+    }
+
 }

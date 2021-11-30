@@ -27,7 +27,7 @@
 
         <EditText
             android:id="@+id/public_key_input"
-            android:text=""
+            android:text="@{registerModel.publicKey}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -49,7 +49,7 @@
 
         <EditText
             android:id="@+id/private_key_input"
-            android:text=""
+            android:text="@{registerModel.privateKey}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -59,8 +59,8 @@
             app:layout_constraintTop_toBottomOf="@id/private_key_text" />
 
         <TextView
-            android:id="@+id/email_text"
-            android:text="Email"
+            android:id="@+id/code_text"
+            android:text="Login code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -71,74 +71,27 @@
             app:layout_constraintTop_toBottomOf="@id/private_key_input" />
 
         <EditText
-            android:id="@+id/email_input"
-            android:text="@{registerModel.email}"
+            android:id="@+id/code_value"
+            android:text="@{registerModel.code}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_text" />
-
-        <TextView
-            android:id="@+id/pass_text"
-            android:text="Password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_input" />
-
-        <EditText
-            android:id="@+id/pass_input"
-            android:text="@{registerModel.password}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pass_text" />
-
-        <TextView
-            android:id="@+id/pass_confirmation_text"
-            android:text="Password confirmation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pass_input" />
-
-        <EditText
-            android:id="@+id/pass_confirmation_input"
-            android:text=""
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pass_confirmation_text" />
+            app:layout_constraintTop_toBottomOf="@id/code_text" />
 
         <Button
             android:id="@+id/register_btn"
             android:text="Register"
-            android:onClick="@{() -> registerModel.registerUser()}"
+            android:onClick="@{() -> registerModel.createStellarUser()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pass_confirmation_input" />
-
+            app:layout_constraintTop_toBottomOf="@id/code_value" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
