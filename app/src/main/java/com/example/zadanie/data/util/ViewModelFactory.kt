@@ -19,9 +19,7 @@ package com.opinyour.android.app.data.utils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.zadanie.data.DataRepository
-import com.example.zadanie.ui.viewModels.AddContactViewModel
-import com.example.zadanie.ui.viewModels.ContactsViewModel
-import com.example.zadanie.ui.viewModels.DatabaseViewModel
+import com.example.zadanie.ui.viewModels.*
 
 /**
  * Factory for ViewModels
@@ -43,6 +41,16 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
         if (modelClass.isAssignableFrom(AddContactViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return AddContactViewModel(repository) as T
+        }
+
+        if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return RegisterViewModel(repository) as T
+        }
+
+        if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return HomeViewModel(repository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class")

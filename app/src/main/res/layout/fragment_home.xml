@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="credentials"
+            name="homeModel"
             type="com.example.zadanie.ui.viewModels.HomeViewModel" />
     </data>
 
@@ -61,7 +61,7 @@
 
         <EditText
             android:id="@+id/pass_input"
-            android:text=""
+            android:text="@={homeModel.inputText}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

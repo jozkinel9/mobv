@@ -1,33 +1,34 @@
 package com.example.zadanie.ui.viewModels
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.zadanie.data.DataRepository
+import com.example.zadanie.data.db.model.Account
+import com.example.zadanie.data.db.model.Contact
 import com.example.zadanie.doAsync
+import kotlinx.coroutines.launch
 import org.stellar.sdk.KeyPair
 import org.stellar.sdk.Server
 import java.net.URL
 import java.util.*
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel(private val repository: DataRepository) : ViewModel() {
     var code: MutableLiveData<String> = MutableLiveData()
-    var privateKey: MutableLiveData<String> = MutableLiveData()
-    var publicKey: MutableLiveData<String> = MutableLiveData()
 
-    fun registerUser(){
-        Log.e("code", this.code.value.toString())
-        Log.e("privateKey", this.privateKey.value.toString())
-        Log.e("publicKey", this.publicKey.value.toString())
-
-
-    }
+//    fun registerUser(){
+//        Log.e("code", this.code.value.toString())
+//        Log.e("privateKey", this.privateKey.value.toString())
+//        Log.e("publicKey", this.publicKey.value.toString())
+//
+//
+//    }
 
     fun createStellarUser(){
         val pair = KeyPair.random()
 
         // TODO - ulozit pair do nasej DB ku kodu ktory zadal uzivatel
-        println(pair.accountId)
-        println(pair.publicKey)
+//        privateKey = pair.accountId
+//        publicKey = pair.publicKey.toString()
 
         doAsync {
             val friendbotUrl = java.lang.String.format(
@@ -50,6 +51,18 @@ class RegisterViewModel : ViewModel() {
                     balance.assetCode,
                     balance.balance
                 )
+            }
+        }
+        insertAccountIntoDb(pair)
+    }
+
+    private fun insertAccountIntoDb(pair: KeyPair) {
+        System.out.printf("funkcia zavolana")
+        code.value?.let {
+            if (it.isNotEmpty()) {
+                System.out.printf("UUUUUUSPPEEEEEEEEEECHHH")
+                viewModelScope.launch { repository.insertAccount(Account("bla", it, pair.publicKey.toString(), pair.accountId)) }
+                System.out.printf("UUUUUUSPPEEEEEEEEEECHHH")
             }
         }
     }

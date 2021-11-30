@@ -10,15 +10,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.example.zadanie.R
 import com.example.zadanie.databinding.BasicFragmentBinding
 import com.example.zadanie.databinding.RegisterFragmentBinding
 import com.example.zadanie.ui.viewModels.BasicViewModel
+import com.example.zadanie.ui.viewModels.DatabaseViewModel
 import com.example.zadanie.ui.viewModels.RegisterViewModel
+import com.opinyour.android.app.data.utils.Injection
 
 class RegisterFragment : Fragment() {
-    private val registerViewModel: RegisterViewModel by viewModels()
+    private lateinit var registerViewModel: RegisterViewModel
     private lateinit var binding: RegisterFragmentBinding
 
     override fun onCreateView(
@@ -26,6 +29,9 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.register_fragment, container, false)
+        registerViewModel =
+            ViewModelProvider(this, Injection.provideViewModelFactory(requireContext()))
+                .get(RegisterViewModel::class.java)
         binding.registerModel = registerViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
