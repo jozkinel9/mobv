@@ -15,14 +15,6 @@ import java.util.*
 class RegisterViewModel(private val repository: DataRepository) : ViewModel() {
     var code: MutableLiveData<String> = MutableLiveData()
 
-//    fun registerUser(){
-//        Log.e("code", this.code.value.toString())
-//        Log.e("privateKey", this.privateKey.value.toString())
-//        Log.e("publicKey", this.publicKey.value.toString())
-//
-//
-//    }
-
     fun createStellarUser(){
         val pair = KeyPair.random()
 

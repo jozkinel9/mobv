@@ -13,6 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/test"
+            android:text="@{homeModel.wordAsText.toString()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <Button
             android:id="@+id/database_btn"
             android:text="Otvor databazu"
@@ -62,6 +69,7 @@
         <EditText
             android:id="@+id/pass_input"
             android:text="@={homeModel.inputText}"
+            android:inputType="numberPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

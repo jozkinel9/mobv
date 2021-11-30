@@ -19,10 +19,14 @@
             app:destination="@id/databaseFragment" />
         <action
             android:id="@+id/action_homeFragment_to_basicFragment"
-            app:destination="@id/basicFragment" />
+            app:destination="@id/basicFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -31,7 +35,9 @@
         tools:layout="@layout/register_fragment">
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/registerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/basicFragment"
@@ -40,7 +46,9 @@
         tools:layout="@layout/basic_fragment">
         <action
             android:id="@+id/action_basicFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/basicFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_basicFragment_to_transactionsFragment"
             app:destination="@id/transactionsFragment" />

@@ -49,10 +49,14 @@ class HomeFragment : Fragment() {
             it.findNavController().navigate(R.id.go_to_database)
         }
 
-//      nav to BasicFragment
         binding.loginBtn.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_basicFragment)
+            homeViewModel.checkUserPin(it.findNavController())
         }
+
+////      nav to BasicFragment
+//        binding.loginBtn.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_homeFragment_to_basicFragment)
+//        }
 
 //      nav to RegisterFragment
         binding.registerBtn.setOnClickListener {
