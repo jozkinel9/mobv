@@ -42,7 +42,7 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //      nav to HomeFragment
-        binding.registerBtn.setOnClickListener {
+        binding.backBtn.setOnClickListener {
             it.findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
         }
     }

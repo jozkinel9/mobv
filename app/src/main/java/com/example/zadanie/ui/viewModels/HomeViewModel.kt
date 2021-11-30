@@ -5,30 +5,46 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import com.example.zadanie.R
 import com.example.zadanie.data.DataRepository
 import com.example.zadanie.data.db.model.Account
+import com.example.zadanie.databinding.BasicFragmentBinding
+import com.example.zadanie.databinding.FragmentHomeBinding
+import com.example.zadanie.ui.HomeFragment
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeViewModel(private val repository: DataRepository) : ViewModel() {
     val accounts: LiveData<List<Account>>
         get() = repository.getAccounts()
 
     val inputText: MutableLiveData<String> = MutableLiveData()
-
-// TODO   je to zatad spravene na kontrolovanie passwordu,
-//  ale ani to nevim jak prehodit na druhy fragment
-    fun checkUserPin() : Boolean?  = Transformations.map(accounts) {
-            var check = false
-            it?.let {
-                for (i in it) {
-                    if(i.password.equals(inputText)) {
-                        check = true
-                        break
+    val wordAsText: LiveData<MutableList<String>> = Transformations.map(accounts) {
+        val text: MutableList<String> = mutableListOf()
+        it?.let {
+            it.forEach{text.add(it.password)}
+//                it.forEach { text += "${it.accId}, ${it.password}, ${it.private_key} \n" }
+        }
+        text
+    }
+// TODO   je to zatad spravene na kontrolovanie passwordu, je to picovsky spravene ale nevim jak na to inac
+    fun checkUserPin(navController: NavController) {
+        wordAsText.value?.let { wat ->
+            if (wat.isNotEmpty()) {
+                inputText.value?.let { it ->
+                    if (it.isNotEmpty()) {
+                        for (i in wat) {
+                            if (i == it) {
+                                navController.navigate(R.id.action_homeFragment_to_basicFragment)
+                                break
+                            }
+                        }
                     }
                 }
             }
-            check
-        }.value
-
+        }
+}
 
 
 

@@ -30,14 +30,24 @@ class BasicFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        nav to DatabaseFragment
-//        binding.databaseBtn.setOnClickListener {
-//            it.findNavController().navigate(R.id.go_to_database)
-//        }
-
-//      nav to ContactsFragment
+        // nav to ContactsFragment
         binding.contactsBtn.setOnClickListener {
             it.findNavController().navigate(R.id.action_basicFragment_to_contactsFragment)
+        }
+
+        // nav to HomeFragment
+        binding.logoutBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_basicFragment_to_homeFragment)
+        }
+
+        // nav to TransferFragment
+        binding.trasnferBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_basicFragment_to_transferFragment)
+        }
+
+        // nav to TransactionsFragment
+        binding.transactionsBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_basicFragment_to_transactionsFragment)
         }
     }
 
