@@ -23,7 +23,6 @@ class DatabaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_database, container, false)
-
         databaseViewModel =
             ViewModelProvider(this, Injection.provideViewModelFactory(requireContext()))
                 .get(DatabaseViewModel::class.java)
