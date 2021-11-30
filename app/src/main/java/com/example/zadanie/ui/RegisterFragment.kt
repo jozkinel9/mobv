@@ -1,6 +1,8 @@
 package com.example.zadanie.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,8 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.register_fragment, container, false)
+        binding.registerModel = registerViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }
