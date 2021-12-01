@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.zadanie.data.db.model.Account
 import com.example.zadanie.data.db.model.Contact
+import java.security.PrivateKey
 
 @Dao
 interface DbDao {
-//  Accounts
+    //  Accounts
     @Insert(entity = Account::class)
-        //"INSERT INTO accounts_table (email, password, public_key, private_key) VALUES (:account)")
     suspend fun insertAccount(account: Account)
 
     @Delete
@@ -18,13 +18,19 @@ interface DbDao {
     @Query("SELECT * FROM accounts_table")
     fun getAccounts(): LiveData<List<Account>>
 
+    @Query("SELECT * FROM accounts_table WHERE accId = :accIdLogged")
+    fun getAccountById(accIdLogged: Long): LiveData<Account>
 
-//  Contacts
+    @Query("SELECT * FROM accounts_table WHERE private_key = :privateKey")
+    fun getAccountByPrivateKey(privateKey: String): LiveData<List<Account>>
+
+
+    //  Contacts
     @Insert(entity = Contact::class)
     suspend fun insertContact(contact: Contact)
 
-    @Query("SELECT * FROM contacts_table")
-    fun getContacts(): LiveData<List<Contact>>
+    @Query("SELECT * FROM contacts_table WHERE accId = :accIdLogged")
+    fun getContacts(accIdLogged: Long): LiveData<List<Contact>>
 
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertWords(accounts: List<Account>)

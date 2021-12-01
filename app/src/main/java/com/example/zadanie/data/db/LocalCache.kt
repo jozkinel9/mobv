@@ -5,18 +5,22 @@ import com.example.zadanie.data.db.model.Account
 import com.example.zadanie.data.db.model.Contact
 
 class LocalCache(private val dao: DbDao) {
-//  Accounts
+    //  Accounts
     suspend fun insertAccount(account: Account) {
         dao.insertAccount(account)
     }
     fun getAccounts(): LiveData<List<Account>> = dao.getAccounts()
 
+    fun getAccountById(accIdLogged: Long): LiveData<Account> = dao.getAccountById(accIdLogged)
 
-//  Contacts
+    fun getAccountByPrivateKey(privateKey: String): LiveData<List<Account>> = dao.getAccountByPrivateKey(privateKey)
+
+
+    //  Contacts
     suspend fun insertContact(contact: Contact) {
-    dao.insertContact(contact)
-}
-    fun getContacts(): LiveData<List<Contact>> = dao.getContacts()
+        dao.insertContact(contact)
+    }
+    fun getContacts(accIdLogged: Long): LiveData<List<Contact>> = dao.getContacts(accIdLogged)
 
 
 

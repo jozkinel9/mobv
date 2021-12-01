@@ -8,6 +8,7 @@ import com.example.zadanie.data.db.model.Account
 import com.example.zadanie.data.db.model.Contact
 import com.example.zadanie.doAsync
 import kotlinx.coroutines.launch
+import org.stellar.sdk.Server
 
 class AddAccountViewModel (private val repository: DataRepository) : ViewModel() {
     val private_key: MutableLiveData<String> = MutableLiveData()
@@ -16,7 +17,9 @@ class AddAccountViewModel (private val repository: DataRepository) : ViewModel()
     //TODO neotestovane ci to funguje, alebo dat raci cele do async? netusim
     fun insertAccount() {
         doAsync {
-            var a = repository.isValidStellarAccount(public_key.toString(), private_key.toString())
+            val server = Server("https://horizon-testnet.stellar.org")
+            server.accounts().account(public_key.value)
+//            var a = repository.isValidStellarAccount(public_key.toString(), private_key.toString())
         }
         private_key.value?.let { private_keyIt ->
             if (private_keyIt.isNotEmpty()) {

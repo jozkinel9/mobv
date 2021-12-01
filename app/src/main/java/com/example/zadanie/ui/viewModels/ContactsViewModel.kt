@@ -1,12 +1,13 @@
 package com.example.zadanie.ui.viewModels
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.zadanie.data.DataRepository
 import com.example.zadanie.data.db.model.Contact
 
 class ContactsViewModel(private val repository: DataRepository) : ViewModel() {
     val contacts: LiveData<List<Contact>>
-        get() = repository.getContacts()
+        get() = repository.getContacts(repository.getLoggedUser().getAccId())
 
     val contactsAsText: LiveData<String> = Transformations.map(contacts) {
         var text = ""
@@ -15,5 +16,7 @@ class ContactsViewModel(private val repository: DataRepository) : ViewModel() {
         }
         text
     }
+    var bla = repository.getLoggedUser(). let { Log.e("LoggedUser", "done: ${it.getAccId()}    ${it.getPin()}") }
+
 
 }

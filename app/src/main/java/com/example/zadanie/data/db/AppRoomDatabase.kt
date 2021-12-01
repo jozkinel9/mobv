@@ -10,7 +10,7 @@ import com.example.zadanie.data.db.model.Transaction
 
 @Database(
     entities = [Account::class, Contact::class, Transaction::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class AppRoomDatabase : RoomDatabase() {

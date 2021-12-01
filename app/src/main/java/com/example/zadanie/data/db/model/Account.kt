@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "Accounts_table")
+@Entity(tableName = "accounts_table")
 data class Account(
     @PrimaryKey(autoGenerate = true)
     var accId: Long,
