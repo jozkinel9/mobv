@@ -19,11 +19,16 @@ interface DbDao {
     fun getAccounts(): LiveData<List<Account>>
 
     @Query("SELECT * FROM accounts_table WHERE accId = :accIdLogged")
-    fun getAccountById(accIdLogged: Long): LiveData<Account>
+    fun getAccountById(accIdLogged: Long): Account
+
+    @Query("SELECT balance FROM accounts_table WHERE public_key = :accountId")
+    fun getBalance(accountId: String): String
 
     @Query("SELECT * FROM accounts_table WHERE private_key = :privateKey")
-    fun getAccountByPrivateKey(privateKey: String): LiveData<List<Account>>
+    fun getAccountByPrivateKey(privateKey: String): Account
 
+    @Query("UPDATE accounts_table SET balance = :balance WHERE public_key = :accountId")
+    fun updateBalance(accountId: String, balance: String)
 
     //  Contacts
     @Insert(entity = Contact::class)

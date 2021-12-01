@@ -6,15 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.zadanie.R
-import com.example.zadanie.databinding.BasicFragmentBinding
 import com.example.zadanie.databinding.ContactsFragmentBinding
-import com.example.zadanie.ui.viewModels.BasicViewModel
 import com.example.zadanie.ui.viewModels.ContactsViewModel
-import com.example.zadanie.ui.viewModels.DatabaseViewModel
 import com.opinyour.android.app.data.utils.Injection
 
 class ContactsFragment : Fragment() {

@@ -14,12 +14,16 @@ data class Account(
     var public_key: String,
 
     @ColumnInfo(name = "private_key")
-    var private_key: String
+    var private_key: String,
+
+    @ColumnInfo(name = "balance")
+    var balance: String
 ) {
     constructor(
         public_key: String,
+        balance: String,
         private_key: String)
-            : this(0, public_key, private_key)
+            : this(0, public_key, private_key, balance)
 }
 
 /*

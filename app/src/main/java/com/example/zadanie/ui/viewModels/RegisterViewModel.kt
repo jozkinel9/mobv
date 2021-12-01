@@ -16,14 +16,13 @@ class RegisterViewModel(private val repository: DataRepository) : ViewModel() {
     val generatedPublicKey: MutableLiveData<String> = MutableLiveData()
     val generatedPrivateKey: MutableLiveData<String> = MutableLiveData()
 
-    // TODO ci to dat raci cele do async? netusim
     fun createStellarUser(){
         val pair = KeyPair.random()
         doAsync {
             repository.createStellarAccount(pair)
         }
 
-        viewModelScope.launch { repository.insertAccount(Account(pair.accountId, pair.secretSeed.joinToString("")) ) }
+        viewModelScope.launch { repository.insertAccount(Account(public_key = pair.accountId, private_key = pair.secretSeed.joinToString(""), balance = "" )) }
 
         generatedPublicKey.value = pair.accountId
         generatedPrivateKey.value = pair.secretSeed.joinToString("")

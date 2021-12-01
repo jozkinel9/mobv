@@ -11,15 +11,19 @@ class LocalCache(private val dao: DbDao) {
     }
     fun getAccounts(): LiveData<List<Account>> = dao.getAccounts()
 
-    fun getAccountById(accIdLogged: Long): LiveData<Account> = dao.getAccountById(accIdLogged)
+    fun getAccountById(accIdLogged: Long): Account = dao.getAccountById(accIdLogged)
 
-    fun getAccountByPrivateKey(privateKey: String): LiveData<List<Account>> = dao.getAccountByPrivateKey(privateKey)
+    fun getBalance(accountId: String): String = dao.getBalance(accountId)
 
+    fun getAccountByPrivateKey(privateKey: String): Account = dao.getAccountByPrivateKey(privateKey)
+
+    fun updateBalance(accountId: String, balance: String) = dao.updateBalance(accountId, balance)
 
     //  Contacts
     suspend fun insertContact(contact: Contact) {
         dao.insertContact(contact)
     }
+
     fun getContacts(accIdLogged: Long): LiveData<List<Contact>> = dao.getContacts(accIdLogged)
 
 

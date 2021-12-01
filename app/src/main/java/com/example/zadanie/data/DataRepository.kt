@@ -42,6 +42,7 @@ class DataRepository private constructor(
 //            this.loggedUser = LoggedUser(accId, pin)
 //        }
     }
+
     fun setLoggedUser(accId: Long, pin: String) {
         loggedUser = LoggedUser(accId, pin)
     }
@@ -49,7 +50,6 @@ class DataRepository private constructor(
     fun getLoggedUser() : LoggedUser {
         return loggedUser
     }
-
 
     //    Create account on Stellar
     fun createStellarAccount(pair: KeyPair) {
@@ -92,26 +92,6 @@ class DataRepository private constructor(
         }
     }
 
-
-    fun makeTransfer(transaction: Transaction) {
-        val server = Server("https://horizon-testnet.stellar.org")
-        try {
-            val response: SubmitTransactionResponse = server.submitTransaction(transaction)
-            println("Success!")
-            println(response)
-        } catch (e: Exception) {
-            println("Something went wrong!")
-            println(e.message)
-            // If the result is unknown (no response body, timeout etc.) we simply resubmit
-            // already built transaction:
-            // SubmitTransactionResponse response = server.submitTransaction(transaction);
-        }
-    }
-
-
-
-
-
     //  Accounts
     fun getAccounts(): LiveData<List<Account>> = cache.getAccounts()
 
@@ -119,10 +99,9 @@ class DataRepository private constructor(
         cache.insertAccount(account)
     }
 
-    fun getAccountById(accIdLogged: Long): LiveData<Account> = cache.getAccountById(accIdLogged)
+    fun getAccountById(accIdLogged: Long): Account = cache.getAccountById(accIdLogged)
 
-    fun getAccountByPrivateKey(privateKey: String): LiveData<List<Account>> = cache.getAccountByPrivateKey(privateKey)
-
+    fun getAccountByPrivateKey(privateKey: String): Account = cache.getAccountByPrivateKey(privateKey)
 
     //  Contacts
     suspend fun insertContact(contact: Contact) {
@@ -131,5 +110,19 @@ class DataRepository private constructor(
 
     fun getContacts(accIdLogged: Long): LiveData<List<Contact>> = cache.getContacts(accIdLogged)
 
+    fun getBalance(accountId: String) : String {
+        return cache.getBalance(accountId)
+    }
 
+    fun updateBalance(accountId: String): String {
+        val server = Server("https://horizon-testnet.stellar.org/")
+        val account = server.accounts().account(accountId)
+
+        for (balance in account.balances) {
+            cache.updateBalance(accountId, balance.balance)
+            return balance.balance
+        }
+
+        return ""
+    }
 }

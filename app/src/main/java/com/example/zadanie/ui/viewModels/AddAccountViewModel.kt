@@ -1,5 +1,6 @@
 package com.example.zadanie.ui.viewModels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,28 +9,28 @@ import com.example.zadanie.data.db.model.Account
 import com.example.zadanie.data.db.model.Contact
 import com.example.zadanie.doAsync
 import kotlinx.coroutines.launch
+import org.stellar.sdk.KeyPair
 import org.stellar.sdk.Server
+import java.lang.Exception
 
 class AddAccountViewModel (private val repository: DataRepository) : ViewModel() {
     val private_key: MutableLiveData<String> = MutableLiveData()
-    val public_key: MutableLiveData<String> = MutableLiveData()
+    val notification: MutableLiveData<String> = MutableLiveData()
+    val exists = false
 
-    //TODO neotestovane ci to funguje, alebo dat raci cele do async? netusim
     fun insertAccount() {
         doAsync {
             val server = Server("https://horizon-testnet.stellar.org")
-            server.accounts().account(public_key.value)
-//            var a = repository.isValidStellarAccount(public_key.toString(), private_key.toString())
-        }
-        private_key.value?.let { private_keyIt ->
-            if (private_keyIt.isNotEmpty()) {
-                public_key.value?.let { public_keyIt ->
-                    if (public_keyIt.isNotEmpty()) {
-                        viewModelScope.launch { repository.insertAccount(Account(public_keyIt, private_keyIt)) }
-                        private_key.postValue("")
-                        public_key.postValue("")
-                    }
-                }
+
+            try {
+                val keyPair = KeyPair.fromSecretSeed(private_key.value)
+                server.accounts().account(keyPair.accountId)
+
+                viewModelScope.launch { repository.insertAccount(Account(public_key = keyPair.accountId.toString(), private_key = keyPair.secretSeed.joinToString(""), balance = "")) }
+                private_key.postValue("")
+                notification.postValue("Success")
+            } catch (e: Exception) {
+                notification.postValue("Stellar account doesnt exists")
             }
         }
     }

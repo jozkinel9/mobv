@@ -14,27 +14,18 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/public_key_text"
-            android:text="Public key"
-            android:layout_width="match_parent"
+            android:id="@+id/notification"
+            android:text="@{addAccountModel.notification}"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="150dp"
+            android:textSize="15pt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/public_key_input"
-            android:text="@={addAccountModel.public_key}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/public_key_text" />
 
         <TextView
             android:id="@+id/private_key_text"
@@ -45,7 +36,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/public_key_input" />
+            app:layout_constraintTop_toBottomOf="@id/notification" />
 
         <EditText
             android:id="@+id/private_key_input"

@@ -1,22 +1,15 @@
 package com.example.zadanie.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
-import androidx.navigation.findNavController
 import com.example.zadanie.R
 import com.example.zadanie.databinding.AddContactFragmentBinding
-import com.example.zadanie.databinding.ContactsFragmentBinding
 import com.example.zadanie.ui.viewModels.AddContactViewModel
-import com.example.zadanie.ui.viewModels.ContactsViewModel
-import com.example.zadanie.ui.viewModels.DatabaseViewModel
 import com.opinyour.android.app.data.utils.Injection
 
 class AddContactFragment : Fragment() {

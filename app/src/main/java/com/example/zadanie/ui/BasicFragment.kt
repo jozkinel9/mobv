@@ -6,16 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.zadanie.R
 import com.example.zadanie.databinding.BasicFragmentBinding
 import com.example.zadanie.ui.viewModels.BasicViewModel
-import com.example.zadanie.ui.viewModels.TransferViewModel
+import com.opinyour.android.app.data.utils.Injection
 
 class BasicFragment : Fragment() {
-    private val basicViewModel: BasicViewModel by viewModels()
+    private lateinit var basicViewModel: BasicViewModel
     private lateinit var binding: BasicFragmentBinding
 
     override fun onCreateView(
@@ -23,7 +22,11 @@ class BasicFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.basic_fragment, container, false)
-
+        basicViewModel =
+            ViewModelProvider(this, Injection.provideViewModelFactory(requireContext()))
+                .get(BasicViewModel::class.java)
+        binding.basicModel = basicViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -50,5 +53,4 @@ class BasicFragment : Fragment() {
             it.findNavController().navigate(R.id.action_basicFragment_to_transactionsFragment)
         }
     }
-
 }

@@ -28,11 +28,6 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(DatabaseViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return DatabaseViewModel(repository) as T
-        }
-
         if (modelClass.isAssignableFrom(ContactsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return ContactsViewModel(repository) as T
@@ -61,6 +56,11 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
         if (modelClass.isAssignableFrom(TransferViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return TransferViewModel(repository) as T
+        }
+
+        if (modelClass.isAssignableFrom(BasicViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return BasicViewModel(repository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class")
