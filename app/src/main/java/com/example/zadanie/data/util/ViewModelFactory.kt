@@ -58,6 +58,11 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
             return AddAccountViewModel(repository) as T
         }
 
+        if (modelClass.isAssignableFrom(TransferViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return TransferViewModel(repository) as T
+        }
+
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
