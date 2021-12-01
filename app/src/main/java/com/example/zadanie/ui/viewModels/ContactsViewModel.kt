@@ -11,7 +11,7 @@ class ContactsViewModel(private val repository: DataRepository) : ViewModel() {
     val contactsAsText: LiveData<String> = Transformations.map(contacts) {
         var text = ""
         it?.let {
-            it.forEach { text += "${it.name}, ${it.public_key}\n" }
+            it.forEach { text += "${it.accId}, ${it.name}, ${it.public_key_reciever}\n" }
         }
         text
     }

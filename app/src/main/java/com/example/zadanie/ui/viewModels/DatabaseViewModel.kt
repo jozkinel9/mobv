@@ -14,7 +14,7 @@ class DatabaseViewModel(private val repository: DataRepository) : ViewModel() {
     val wordAsText: LiveData<String> = Transformations.map(accounts) {
         var text = ""
         it?.let {
-            it.forEach { text += "${it.accId}, ${it.password}, ${it.private_key} \n" }
+            it.forEach { text += "${it.accId}, ${it.private_key} \n" }
         }
         text
     }
@@ -24,7 +24,7 @@ class DatabaseViewModel(private val repository: DataRepository) : ViewModel() {
     fun insertAccount() {
         inputText.value?.let {
             if (it.isNotEmpty()) {
-                viewModelScope.launch { repository.insertAccount(Account(it, "bla", "bla", "bla")) }
+                viewModelScope.launch { repository.insertAccount(Account("bla", "bla")) }
                 inputText.postValue("")
             }
         }

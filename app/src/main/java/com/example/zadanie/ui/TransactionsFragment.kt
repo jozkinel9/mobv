@@ -27,7 +27,6 @@ class TransactionsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TransactionsViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     fun loadTransactions(){
