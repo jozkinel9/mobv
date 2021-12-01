@@ -53,10 +53,10 @@ class HomeFragment : Fragment() {
             homeViewModel.checkUserPin(it.findNavController())
         }
 
-////      nav to BasicFragment
-//        binding.loginBtn.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_homeFragment_to_basicFragment)
-//        }
+//      nav to AddAccountFragment
+        binding.addAccountBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_addAccountFragment)
+        }
 
 //      nav to RegisterFragment
         binding.registerBtn.setOnClickListener {

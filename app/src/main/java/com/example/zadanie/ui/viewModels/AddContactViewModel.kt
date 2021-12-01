@@ -17,7 +17,7 @@ class AddContactViewModel(private val repository: DataRepository) : ViewModel() 
             if (nameIt.isNotEmpty()) {
                 public_key.value?.let { public_keyIt ->
                     if (public_keyIt.isNotEmpty()) {
-                        viewModelScope.launch { repository.insertContact(Contact("blaa", nameIt, public_keyIt)) }
+                        viewModelScope.launch { repository.insertContact(Contact(1, nameIt, public_keyIt)) }
                         name.postValue("")
                         public_key.postValue("")
                     }

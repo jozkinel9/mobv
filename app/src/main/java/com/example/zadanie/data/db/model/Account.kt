@@ -10,12 +10,6 @@ data class Account(
     @PrimaryKey(autoGenerate = true)
     var accId: Long,
 
-    @ColumnInfo(name = "email")
-    var email: String,
-
-    @ColumnInfo(name = "password")
-    var password: String,
-
     @ColumnInfo(name = "public_key")
     var public_key: String,
 
@@ -23,11 +17,9 @@ data class Account(
     var private_key: String
 ) {
     constructor(
-        email: String,
-        password: String,
         public_key: String,
         private_key: String)
-            : this(0, email, password, public_key, private_key)
+            : this(0, public_key, private_key)
 }
 
 /*

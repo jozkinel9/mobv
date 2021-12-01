@@ -6,33 +6,43 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import com.example.zadanie.R
 import com.example.zadanie.data.DataRepository
 import com.example.zadanie.data.db.model.Account
-import com.example.zadanie.databinding.BasicFragmentBinding
-import com.example.zadanie.databinding.FragmentHomeBinding
-import com.example.zadanie.ui.HomeFragment
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeViewModel(private val repository: DataRepository) : ViewModel() {
     val accounts: LiveData<List<Account>>
         get() = repository.getAccounts()
 
-    val inputText: MutableLiveData<String> = MutableLiveData()
-    val wordAsText: LiveData<MutableList<String>> = Transformations.map(accounts) {
+//    nahradit za privateKeyForTesting
+//    val inPrivateKey: MutableLiveData<String> = MutableLiveData()
+
+    val inPin: MutableLiveData<String> = MutableLiveData()
+
+    // all privatekys from db
+    val dbPrivateKeys: LiveData<MutableList<String>> = Transformations.map(accounts) {
         val text: MutableList<String> = mutableListOf()
         it?.let {
-            it.forEach{text.add(it.password)}
-//                it.forEach { text += "${it.accId}, ${it.password}, ${it.private_key} \n" }
+            it.forEach{text.add(it.private_key)}
         }
         text
     }
-// TODO   je to zatad spravene na kontrolovanie passwordu, je to picovsky spravene ale nevim jak na to inac
+
+//    only for testing, vymenit za inPrivateKey
+    val privateKeyForTesting: MutableLiveData<String> = Transformations.map(accounts) {
+        var text = ""
+        it?.let {
+            text = it.get(0).private_key
+        }
+        text
+    } as MutableLiveData<String>
+
+
+    // check if private key exist in db, TODO ulozit accId a PIN do singleton classy alebo db
     fun checkUserPin(navController: NavController) {
-        wordAsText.value?.let { wat ->
+        dbPrivateKeys.value?.let { wat ->
             if (wat.isNotEmpty()) {
-                inputText.value?.let { it ->
+                privateKeyForTesting.value?.let { it ->
                     if (it.isNotEmpty()) {
                         for (i in wat) {
                             if (i == it) {
@@ -50,15 +60,12 @@ class HomeViewModel(private val repository: DataRepository) : ViewModel() {
 
 
 
-//    //TODO: 3. urobit enkapsulaciu premennej word
 //    val _word: MutableLiveData<String> = MutableLiveData()
 //    val word: LiveData<String>
 //        get() = _word
 //
-//    //TODO: 4. urobit obojsmerny binding pre edittext
 //    val inputText: MutableLiveData<String> = MutableLiveData()
 //
-//    //TODO: 5. nahradit listener databindingom v xml
 //    fun changeWord() {
 //        inputText.value?.let {
 //            if (it.isNotEmpty()) {
@@ -68,7 +75,6 @@ class HomeViewModel(private val repository: DataRepository) : ViewModel() {
 //        }
 //    }
 //
-//    //TODO: 6b.urobit transformaciu slova aby sa zobrazoval text "Slovo je: "
 //    val transformedText: LiveData<String> = Transformations.map(inputText) {
 //        "Slovo je $it"
 //    }

@@ -53,6 +53,11 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
             return HomeViewModel(repository) as T
         }
 
+        if (modelClass.isAssignableFrom(AddAccountViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return AddAccountViewModel(repository) as T
+        }
+
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

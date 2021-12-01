@@ -27,6 +27,7 @@
 
         <EditText
             android:id="@+id/public_key_input"
+            android:text="@{registerModel.generatedPublicKey}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -48,6 +49,7 @@
 
         <EditText
             android:id="@+id/private_key_input"
+            android:text="@{registerModel.generatedPrivateKey}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -55,29 +57,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/private_key_text" />
-
-        <TextView
-            android:id="@+id/code_text"
-            android:text="Login code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/private_key_input" />
-
-        <EditText
-            android:id="@+id/code_value"
-            android:text="@={registerModel.code}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/code_text" />
 
         <Button
             android:id="@+id/register_btn"
@@ -89,7 +68,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/code_value" />
+            app:layout_constraintTop_toBottomOf="@id/private_key_input" />
 
         <Button
             android:id="@+id/back_btn"

@@ -34,7 +34,6 @@ class TransferFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TransferViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     fun makeTransaction(){

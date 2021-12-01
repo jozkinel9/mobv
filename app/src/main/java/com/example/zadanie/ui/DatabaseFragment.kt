@@ -37,11 +37,9 @@ class DatabaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-//        //TODO: 10. nahradit listener databindingom v xml
 //        word_btn.setOnClickListener { addWord() }
     }
 
-//    //TODO: 10. odstanit funkciu pomocou databindingu v xml
 //    private fun addWord() {
 //        val word = word_input.text.toString()
 //        if (word.isNotEmpty()) {
