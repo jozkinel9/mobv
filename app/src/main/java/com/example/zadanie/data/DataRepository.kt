@@ -1,6 +1,5 @@
 package com.example.zadanie.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.zadanie.data.db.LocalCache
 import com.example.zadanie.data.db.model.Account
@@ -9,10 +8,6 @@ import org.stellar.sdk.KeyPair
 import org.stellar.sdk.Server
 import java.net.URL
 import java.util.*
-import org.stellar.sdk.requests.ErrorResponse
-import org.stellar.sdk.Transaction
-import org.stellar.sdk.responses.SubmitTransactionResponse
-import java.lang.Exception
 
 
 /**
@@ -77,43 +72,6 @@ class DataRepository private constructor(
 
     }
 
-    //TODO nejak to osetrit ze ci taky naozaj existuje a vratit bud true alebo false
-    fun isValidStellarAccount(publicKey: String, privateKey: String) :Boolean {
-        val server = Server("https://horizon-testnet.stellar.org")
-        try {
-            server.accounts()
-                .account(publicKey)
-            return true
-        } catch (e: ErrorResponse) {
-            if (e.code == 404) {
-                Log.e("Stellar response", "error, ucet neexistuje")
-            }
-            throw e
-        }
-    }
-
-    //  Accounts
-    fun getAccounts(): LiveData<List<Account>> = cache.getAccounts()
-
-    suspend fun insertAccount(account: Account) {
-        cache.insertAccount(account)
-    }
-
-    fun getAccountById(accIdLogged: Long): Account = cache.getAccountById(accIdLogged)
-
-    fun getAccountByPrivateKey(privateKey: String): Account = cache.getAccountByPrivateKey(privateKey)
-
-    //  Contacts
-    suspend fun insertContact(contact: Contact) {
-        cache.insertContact(contact)
-    }
-
-    fun getContacts(accIdLogged: Long): LiveData<List<Contact>> = cache.getContacts(accIdLogged)
-
-    fun getBalance(accountId: String) : String {
-        return cache.getBalance(accountId)
-    }
-
     fun updateBalance(accountId: String): String {
         val server = Server("https://horizon-testnet.stellar.org/")
         val account = server.accounts().account(accountId)
@@ -125,4 +83,28 @@ class DataRepository private constructor(
 
         return ""
     }
+
+
+    //  Accounts
+    fun getAccounts(): LiveData<List<Account>> = cache.getAccounts()
+
+    suspend fun insertAccount(account: Account) = cache.insertAccount(account)
+
+    fun getAccountById(accIdLogged: Long): Account = cache.getAccountById(accIdLogged)
+
+    fun getAccountByPrivateKey(privateKey: String): Account =
+        cache.getAccountByPrivateKey(privateKey)
+
+    fun getBalance(publicKey: String): String = cache.getBalance(publicKey)
+
+    fun getBalanceById(accIdLogged: Long): String = cache.getBalanceById(accIdLogged)
+
+
+    //  Contacts
+    suspend fun insertContact(contact: Contact) {
+        cache.insertContact(contact)
+    }
+
+    fun getContacts(accIdLogged: Long): LiveData<List<Contact>> = cache.getContacts(accIdLogged)
+
 }

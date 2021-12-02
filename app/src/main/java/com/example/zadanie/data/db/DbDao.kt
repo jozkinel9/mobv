@@ -1,10 +1,12 @@
 package com.example.zadanie.data.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 import com.example.zadanie.data.db.model.Account
 import com.example.zadanie.data.db.model.Contact
-import java.security.PrivateKey
 
 @Dao
 interface DbDao {
@@ -21,8 +23,11 @@ interface DbDao {
     @Query("SELECT * FROM accounts_table WHERE accId = :accIdLogged")
     fun getAccountById(accIdLogged: Long): Account
 
-    @Query("SELECT balance FROM accounts_table WHERE public_key = :accountId")
-    fun getBalance(accountId: String): String
+    @Query("SELECT balance FROM accounts_table WHERE public_key = :publicKey")
+    fun getBalance(publicKey: String): String
+
+    @Query("SELECT balance FROM accounts_table WHERE accId = :accIdLogged")
+    fun getBalanceById(accIdLogged: Long): String
 
     @Query("SELECT * FROM accounts_table WHERE private_key = :privateKey")
     fun getAccountByPrivateKey(privateKey: String): Account

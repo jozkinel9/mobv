@@ -1,7 +1,9 @@
 package com.example.zadanie.ui.viewModels
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.example.zadanie.data.DataRepository
 import com.example.zadanie.data.db.model.Contact
 
@@ -12,7 +14,7 @@ class ContactsViewModel(private val repository: DataRepository) : ViewModel() {
     val contactsAsText: LiveData<String> = Transformations.map(contacts) {
         var text = ""
         it?.let {
-            it.forEach { text += "${it.accId}, ${it.name}, ${it.public_key_reciever}\n" }
+            it.forEach { text += "${it.name}, ${it.public_key_reciever}\n" }
         }
         text
     }
