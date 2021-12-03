@@ -22,45 +22,60 @@ class TransferViewModel(private val repository: DataRepository) : ViewModel() {
 
     fun makeTransfer() {
         doAsync {
-            val source =
-                KeyPair.fromSecretSeed(repository.getAccountById(repository.getLoggedUser().getAccId()).private_key)
-            val destination =
-                KeyPair.fromAccountId(destinationInput.value)
+            try {
+                notification.postValue("")
 
-            println(destinationInput.value)
+                val source =
+                    KeyPair.fromSecretSeed(
+                        repository.getAccountById(
+                            repository.getLoggedUser().getAccId()
+                        ).private_key
+                    )
+                val destination =
+                    KeyPair.fromAccountId(destinationInput.value)
 
-            val server = Server("https://horizon-testnet.stellar.org")
+                println(destinationInput.value)
 
-            val sourceAccount: AccountResponse = server.accounts().account(source.accountId)
+                val server = Server("https://horizon-testnet.stellar.org")
 
-            val transfer: Transaction = Transaction.Builder(sourceAccount, Network.TESTNET)
-                .addOperation(
-                    PaymentOperation.Builder(destination.accountId, AssetTypeNative(), amount.value).build()
-                )
-                .addMemo(Memo.text("Test Transaction"))
-                .setTimeout(180)
-                .setBaseFee(Transaction.MIN_BASE_FEE)
-                .build()
+                val sourceAccount: AccountResponse = server.accounts().account(source.accountId)
 
-            if(pin.value == repository.getLoggedUser().getPin()) {
-                transfer.sign(source)
+                val transfer: Transaction = Transaction.Builder(sourceAccount, Network.TESTNET)
+                    .addOperation(
+                        PaymentOperation.Builder(
+                            destination.accountId,
+                            AssetTypeNative(),
+                            amount.value
+                        ).build()
+                    )
+                    .addMemo(Memo.text("Test Transaction"))
+                    .setTimeout(180)
+                    .setBaseFee(Transaction.MIN_BASE_FEE)
+                    .build()
 
-                try {
-                    val response: SubmitTransactionResponse = server.submitTransaction(transfer)
-                    notification.postValue("Success")
-                    println("Success!")
-                } catch (e: Exception) {
-                    println("Something went wrong!")
-                    notification.postValue("Something went wrong")
+                if (pin.value == repository.getLoggedUser().getPin()) {
+                    transfer.sign(source)
+
+                    try {
+                        val response: SubmitTransactionResponse = server.submitTransaction(transfer)
+                        notification.postValue("Success")
+                        println("Success!")
+                    } catch (e: Exception) {
+                        println("Something went wrong!")
+                        notification.postValue("Something went wrong")
+                    }
+
+                    repository.getBalance(source.accountId)
+
+                    pin.postValue("")
+                    amount.postValue("")
+                    destinationInput.postValue("")
+                } else {
+                    notification.postValue("Wrong pin")
                 }
-
-                repository.getBalance(source.accountId)
-
-                pin.postValue("")
-                amount.postValue("")
-                destinationInput.postValue("")
-            } else {
-                notification.postValue("Wrong pin")
+            } catch (e: Exception) {
+                println("Wrong destination!")
+                notification.postValue("Wrong destination!")
             }
         }
     }
