@@ -1,12 +1,17 @@
 package com.example.zadanie.ui.viewModels
 
+import android.app.Activity
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.Spinner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.zadanie.data.DataRepository
 import com.example.zadanie.data.db.model.Account
+import com.example.zadanie.data.db.model.Contact
 import com.example.zadanie.doAsync
 import org.stellar.sdk.*
 import org.stellar.sdk.responses.AccountResponse
@@ -15,10 +20,26 @@ import java.lang.Exception
 
 
 class TransferViewModel(private val repository: DataRepository) : ViewModel() {
+    val contacts: LiveData<List<Contact>>
+        get() = repository.getContacts(repository.getLoggedUser().getAccId())
+
     val destinationInput: MutableLiveData<String> = MutableLiveData()
     val pin: MutableLiveData<String> = MutableLiveData()
     val amount: MutableLiveData<String> = MutableLiveData()
     val notification: MutableLiveData<String> = MutableLiveData()
+    val listc: MutableList<Contact> = ArrayList()
+
+    val contactsAsList: LiveData<List<String>> = Transformations.map(contacts) {
+        val text: MutableList<String> = ArrayList()
+        text.add("Vyber prijimatela")
+        it?.let {
+            it.forEach {
+                text.add(it.name)
+                listc.add(it)
+            }
+        }
+        text
+    }
 
     fun makeTransfer() {
         doAsync {
@@ -79,4 +100,30 @@ class TransferViewModel(private val repository: DataRepository) : ViewModel() {
             }
         }
     }
+
+    fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        listc.let {
+            it.forEach {
+                if (it.name == parent?.selectedItem) {
+                    destinationInput.postValue(it.public_key_reciever)
+                    return
+                }
+                else {
+                    destinationInput.postValue("")
+                }
+            }
+        }
+
+    }
+
 }
+
+
+    //pos                                 get selected item position
+    //view.getText()                      get lable of selected item
+    //parent.getAdapter().getItem(pos)    get item by pos
+    //parent.getAdapter().getCount()      get item count
+    //parent.getCount()                   get item count
+    //parent.getSelectedItem()            get selected item
+    //and other...
+
