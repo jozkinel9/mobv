@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1025841085821",
+    "project_id": "kosita-95687",
+    "storage_bucket": "kosita-95687.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025841085821:android:d675e571a3398b4fcbe014",
+        "android_client_info": {
+          "package_name": "com.example.zadanie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025841085821-ll27ljqvaecn7uc40qkpkuc8ag9gj6de.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtuKtmOklUIMyADptmxbPHIuVLsFB2I1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025841085821-ll27ljqvaecn7uc40qkpkuc8ag9gj6de.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

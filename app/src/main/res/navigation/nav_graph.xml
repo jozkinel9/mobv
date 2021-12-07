@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/databaseFragment"
+        android:name="com.example.zadanie.ui.DatabaseFragment"
+        android:label="DatabaseFragment" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.zadanie.ui.HomeFragment"
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/go_to_database"
+            app:destination="@id/databaseFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_basicFragment"
+            app:destination="@id/basicFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_addAccountFragment"
+            app:destination="@id/addAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.zadanie.ui.RegisterFragment"
+        android:label="register_fragment"
+        tools:layout="@layout/register_fragment">
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/registerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/basicFragment"
+        android:name="com.example.zadanie.ui.BasicFragment"
+        android:label="basic_fragment"
+        tools:layout="@layout/basic_fragment">
+        <action
+            android:id="@+id/action_basicFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/basicFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_basicFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_basicFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+        <action
+            android:id="@+id/action_basicFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="com.example.zadanie.ui.TransactionsFragment"
+        android:label="transactions_fragment"
+        tools:layout="@layout/transactions_fragment">
+        <action
+            android:id="@+id/action_transactionsFragment_to_basicFragment"
+            app:destination="@id/basicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="com.example.zadanie.ui.TransferFragment"
+        android:label="transfer_fragment"
+        tools:layout="@layout/transfer_fragment">
+        <action
+            android:id="@+id/action_transferFragment_to_basicFragment"
+            app:destination="@id/basicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.example.zadanie.ui.ContactsFragment"
+        android:label="contacts_fragment"
+        tools:layout="@layout/contacts_fragment">
+        <action
+            android:id="@+id/action_contactsFragment_to_basicFragment"
+            app:destination="@id/basicFragment" />
+        <action
+            android:id="@+id/action_contactsFragment_to_addContactFragment"
+            app:destination="@id/addContactFragment" />
+        <action
+            android:id="@+id/action_contactsFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addContactFragment"
+        android:name="com.example.zadanie.ui.AddContactFragment"
+        android:label="add_contact_fragment"
+        tools:layout="@layout/add_contact_fragment">
+        <action
+            android:id="@+id/action_addContactFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAccountFragment"
+        android:name="com.example.zadanie.ui.AddAccountFragment"
+        android:label="add_account_fragment"
+        tools:layout="@layout/add_account_fragment" >
+        <action
+            android:id="@+id/action_addAccountFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>
