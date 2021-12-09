@@ -34,7 +34,7 @@ class LocalCache(private val dao: DbDao) {
 
     fun getContacts(accIdLogged: Long): LiveData<List<Contact>> = dao.getContacts(accIdLogged)
 
-    fun getTransactions(accIdLogged: Long): LiveData<List<Transaction>> = dao.getTransactions(accIdLogged)
+    fun getTransactions(publicKey: String): LiveData<List<Transaction>> = dao.getTransactions(publicKey)
 
 
 

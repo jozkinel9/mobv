@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.zadanie.R
-import com.example.zadanie.databinding.ContactsFragmentBinding
 import com.example.zadanie.databinding.TransactionsFragmentBinding
-import com.example.zadanie.ui.viewModels.ContactsViewModel
 import com.example.zadanie.ui.viewModels.TransactionsViewModel
 import com.opinyour.android.app.data.utils.Injection
 
@@ -36,5 +34,7 @@ class TransactionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        transactionsViewModel.setTransactions()
     }
 }

@@ -112,5 +112,5 @@ class DataRepository private constructor(
 
     fun getContacts(accIdLogged: Long): LiveData<List<Contact>> = cache.getContacts(accIdLogged)
 
-    fun getTransactions(accIdLogged: Long): LiveData<List<Transaction>> = cache.getTransactions(accIdLogged)
+    fun getTransactions(publicKey: String): LiveData<List<Transaction>> = cache.getTransactions(publicKey)
 }

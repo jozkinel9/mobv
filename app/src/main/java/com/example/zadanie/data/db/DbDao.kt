@@ -43,8 +43,8 @@ interface DbDao {
     @Query("SELECT * FROM contacts_table WHERE accId = :accIdLogged")
     fun getContacts(accIdLogged: Long): LiveData<List<Contact>>
 
-    @Query("SELECT * FROM transactions_table WHERE public_key_sender = :accIdLogged OR public_key_reciever = :accIdLogged")
-    fun getTransactions(accIdLogged: Long): LiveData<List<Transaction>>
+    @Query("SELECT * FROM transactions_table WHERE public_key_sender = :publicKey OR public_key_reciever = :publicKey")
+    fun getTransactions(publicKey: String): LiveData<List<Transaction>>
 
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertWords(accounts: List<Account>)
